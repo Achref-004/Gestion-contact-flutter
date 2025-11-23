@@ -3,17 +3,20 @@ import '../models/user.dart';
 import '../models/contact.dart';
 
 class DatabaseHelper {
+  //Crée une instance unique (Singleton pattern) pour toute l'app
   static final DatabaseHelper instance = DatabaseHelper._init();
   
   // Noms des boxes Hive
+  //const = valeur qui ne change jamais
   static const String _usersBoxName = 'users';
   static const String _contactsBoxName = 'contacts';
   
-  // Session utilisateur
+  // User? = peut être null (aucun utilisateur connecté)
+//   _ = privé (accessible seulement dans cette classe)
   User? _currentUser;
   User? get currentUser => _currentUser;
 
-  DatabaseHelper._init();
+  DatabaseHelper._init();// Constructeur privé (empêche de créer d'autres instances)
 
   // Initialiser Hive
   Future<void> initDB() async {
@@ -70,10 +73,12 @@ class DatabaseHelper {
     return _currentUser;
   }
 
+//Déconnecter l'utilisateur (réinitialise la session)
   void logout() {
     _currentUser = null;
   }
 
+//Vérifier si un email existe déjà (pour éviter les doublons lors de l'inscription)
   Future<bool> emailExistsAsync(String email) async {
     final user = await getUserByEmail(email);
     return user != null;
@@ -116,6 +121,7 @@ class DatabaseHelper {
     return newId;
   }
 
+//Trouver le prochain ID disponible pour un utilisateur
   int _getNextContactId(int userId) {
     final contactsBox = Hive.box<Contact>(_contactsBoxName);
     int maxId = 0;
@@ -211,6 +217,7 @@ class DatabaseHelper {
     return false;
   }
 
+//Fermer  la base de données
   Future<void> close() async {
     await Hive.close();
   }

@@ -16,6 +16,7 @@ dependencies:
 
   # Permissions & Actions
   url_launcher: ^6.2.2
+  font_awesome_flutter: ^10.7.0
   permission_handler: ^11.1.0
 
   # Image picker (pour photo)

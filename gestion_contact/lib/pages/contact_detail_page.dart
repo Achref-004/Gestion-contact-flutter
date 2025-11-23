@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/contact.dart';
 import '../services/database_helper.dart';
 import 'edit_contact_page.dart';
@@ -46,13 +47,23 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     }
   }
 
-  // Envoyer un SMS
-  Future<void> _sendSMS() async {
-    final Uri launchUri = Uri(scheme: 'sms', path: _contact.telephone);
+  // Envoyer un message WhatsApp
+  Future<void> _sendWhatsApp() async {
+    // Nettoyer le numéro de téléphone (enlever espaces, tirets, etc.)
+    String phoneNumber = _contact.telephone.replaceAll(RegExp(r'[^\d+]'), '');
+    
+    // Si le numéro ne commence pas par +, vous pouvez ajouter l'indicatif pays
+    // Exemple pour la Tunisie (+216):
+    // if (!phoneNumber.startsWith('+')) {
+    //   phoneNumber = '+216$phoneNumber';
+    // }
+    
+    final Uri launchUri = Uri.parse('https://wa.me/$phoneNumber');
+    
     if (await canLaunchUrl(launchUri)) {
-      await launchUrl(launchUri);
+      await launchUrl(launchUri, mode: LaunchMode.externalApplication);
     } else {
-      _showError('Impossible d\'envoyer un SMS');
+      _showError('Impossible d\'ouvrir WhatsApp');
     }
   }
 
@@ -117,7 +128,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
 
     if (confirm == true && mounted) {
       await _dbHelper.deleteContact(_contact.id!);
-      Navigator.pop(context, true); // Retour avec signal de suppression
+      Navigator.pop(context, true);
     }
   }
 
@@ -224,17 +235,13 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                     ),
                   );
                   
-                  // CORRECTION: Gérer le retour de la page d'édition
                   if (result != null) {
                     if (result == 'deleted') {
-                      // Contact supprimé, retourner à la liste
                       Navigator.pop(context, true);
                     } else if (result is Contact) {
-                      // Contact mis à jour
                       setState(() {
                         _contact = result;
                       });
-                      // Optionnel: recharger depuis la DB pour être sûr
                       await _reloadContact();
                     }
                   }
@@ -275,9 +282,9 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                             const SizedBox(width: 12),
                             Expanded(
                               child: _buildActionButton(
-                                icon: Icons.message,
-                                label: 'SMS',
-                                onTap: _sendSMS,
+                                icon: FontAwesomeIcons.whatsapp,
+                                label: 'WhatsApp',
+                                onTap: _sendWhatsApp,
                               ),
                             ),
                           ],

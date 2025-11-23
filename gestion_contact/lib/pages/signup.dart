@@ -77,7 +77,7 @@ class _SignUpPageState extends State<SignUpPage>
       return 'Email invalide';
     }
 
-    // Vérifier si l'email existe déjà (CORRECTION ICI)
+    // Vérifier si l'email existe déjà 
     final exists = await _dbService.emailExistsAsync(value.trim());
     if (exists) {
       return 'Cet email est déjà utilisé';
@@ -119,7 +119,7 @@ class _SignUpPageState extends State<SignUpPage>
     // Simulation d'un délai réseau
     await Future.delayed(const Duration(seconds: 1));
 
-    // Enregistrement dans la base de données (CORRECTION ICI)
+    // Enregistrement dans la base de données 
     final user = await _dbService.registerAsync(
       nom: _nomController.text.trim(),
       prenom: _prenomController.text.trim(),
@@ -150,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage>
           ),
         );
 
-        // Aller directement à la liste des contacts (CORRECTION ICI)
+        // Aller directement à la liste des contacts 
         Future.delayed(const Duration(milliseconds: 500), () {
           Navigator.pushReplacementNamed(context, '/contacts_list');
         });
