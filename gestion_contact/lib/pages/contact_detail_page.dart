@@ -52,11 +52,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     // Nettoyer le numéro de téléphone (enlever espaces, tirets, etc.)
     String phoneNumber = _contact.telephone.replaceAll(RegExp(r'[^\d+]'), '');
     
-    // Si le numéro ne commence pas par +, vous pouvez ajouter l'indicatif pays
-    // Exemple pour la Tunisie (+216):
-    // if (!phoneNumber.startsWith('+')) {
-    //   phoneNumber = '+216$phoneNumber';
-    // }
+   
     
     final Uri launchUri = Uri.parse('https://wa.me/$phoneNumber');
     

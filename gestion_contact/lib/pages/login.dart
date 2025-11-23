@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   late Animation<double> _fadeAnimation;
 
   @override
+  //méthode appelée une seule fois quand le widget est inséré dans l’arbre
   void initState() {
     super.initState();
     _animationController = AnimationController(
@@ -33,6 +34,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   }
 
   @override
+  //nettoyage l espace quand le widget est retiré
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
       // Simulation d'un délai réseau
       await Future.delayed(const Duration(seconds: 1));
 
-      // Vérification avec la base de données (CORRECTION ICI)
+      // Vérification avec la base de données 
       final user = await _dbService.loginAsync(
         _emailController.text.trim(),
         _passwordController.text,
@@ -94,7 +96,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
             ),
           );
 
-          // Navigation vers la liste des contacts (CORRECTION ICI)
+          // Navigation vers la liste des contacts 
           Future.delayed(const Duration(milliseconds: 500), () {
             Navigator.pushReplacementNamed(context, '/contacts_list');
           });

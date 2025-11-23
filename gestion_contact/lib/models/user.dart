@@ -37,31 +37,8 @@ class User {
 
   String get fullName => '$prenom $nom';
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'nom': nom,
-      'prenom': prenom,
-      'email': email,
-      'telephone': telephone,
-      'password': password,
-      'created_at': (createdAt ?? DateTime.now()).toIso8601String(),
-    };
-  }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      id: map['id'] as int?,
-      nom: map['nom'] as String,
-      prenom: map['prenom'] as String,
-      email: map['email'] as String,
-      telephone: map['telephone'] as String,
-      password: map['password'] as String,
-      createdAt: map['created_at'] != null 
-          ? DateTime.parse(map['created_at'] as String)
-          : null,
-    );
-  }
+
 
   User copyWith({
     int? id,

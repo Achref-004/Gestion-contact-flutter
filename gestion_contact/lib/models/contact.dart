@@ -57,37 +57,6 @@ class Contact {
 
   String get firstLetter => nom.isNotEmpty ? nom[0].toUpperCase() : '#';
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'user_id': userId,
-      'nom': nom,
-      'prenom': prenom,
-      'email': email,
-      'telephone': telephone,
-      'adresse': adresse,
-      'photo_path': photoPath,
-      'is_favorite': isFavorite ? 1 : 0,
-      'created_at': (createdAt ?? DateTime.now()).toIso8601String(),
-    };
-  }
-
-  factory Contact.fromMap(Map<String, dynamic> map) {
-    return Contact(
-      id: map['id'] as int?,
-      userId: map['user_id'] as int,
-      nom: map['nom'] as String,
-      prenom: map['prenom'] as String,
-      email: map['email'] as String?,
-      telephone: map['telephone'] as String,
-      adresse: map['adresse'] as String?,
-      photoPath: map['photo_path'] as String?,
-      isFavorite: (map['is_favorite'] as int) == 1,
-      createdAt: map['created_at'] != null
-          ? DateTime.parse(map['created_at'] as String)
-          : null,
-    );
-  }
 
   Contact copyWith({
     int? id,

@@ -156,7 +156,7 @@ class _EditContactPageState extends State<EditContactPage> {
       setState(() => _isLoading = true);
 
       try {
-        // CORRECTION: Créer le contact mis à jour en gardant l'ID et userId originaux
+        //  Créer le contact mis à jour en gardant l'ID et userId originaux
         final updated = Contact(
           id: widget.contact.id,
           userId: widget.contact.userId,

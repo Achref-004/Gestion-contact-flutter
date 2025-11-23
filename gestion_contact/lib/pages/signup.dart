@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage>
     return null;
   }
 
-  // CORRECTION: Validation email async
+  //  Validation email async
   Future<String?> _validateEmailAsync(String? value) async {
     if (value == null || value.isEmpty) {
       return 'Email requis';

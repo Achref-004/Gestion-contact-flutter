@@ -32,7 +32,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
     super.dispose();
   }
 
-  // CORRECTION: Charger les contacts de l'utilisateur connecté (async)
+  //  Charger les contacts de l'utilisateur connecté 
   Future<void> _loadContacts() async {
     if (_dbService.currentUser == null) {
       Navigator.pushReplacementNamed(context, '/login');
@@ -88,7 +88,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
     await _loadContacts();
   }
 
-  // CORRECTION: Basculer le statut favori (avec await)
+  //  Basculer le statut favori (avec await)
   Future<void> _toggleFavorite(Contact contact) async {
     final updated = contact.copyWith(isFavorite: !contact.isFavorite);
     await _dbService.updateContact(updated);
@@ -102,7 +102,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
     });
   }
 
-  // CORRECTION: Déconnexion avec méthode existante
+  //  Déconnexion avec méthode existante
   void _logout() {
     showDialog(
       context: context,
@@ -127,7 +127,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
     );
   }
 
-  // CORRECTION: Navigation vers AddContactPage
+  // Navigation vers AddContactPage
   Future<void> _addContact() async {
     if (_dbService.currentUser == null) return;
 
@@ -143,7 +143,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
     }
   }
 
-  // CORRECTION: Navigation vers ContactDetailPage
+  //  Navigation vers ContactDetailPage
   Future<void> _openContactDetail(Contact contact) async {
     final result = await Navigator.push(
       context,
@@ -215,7 +215,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
                     onPressed: _logout,
                     tooltip: 'Déconnexion',
                   ),
-                  // CORRECTION: Bouton ajouter avec navigation
+                  // Bouton ajouter avec navigation
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xFF7C6FDC),
@@ -337,7 +337,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
-        onTap: () => _openContactDetail(contact), // CORRECTION
+        onTap: () => _openContactDetail(contact), 
         borderRadius: BorderRadius.circular(16),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
