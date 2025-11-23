@@ -119,55 +119,10 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     }
   }
 
-  // Fonction pour afficher les comptes de test
-  void _showTestAccounts() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Comptes de test disponibles'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Utilisez ces comptes pour vous connecter :',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              _buildTestAccountInfo('Jean Dupont', 'jean@email.com', '123456'),
-              const Divider(),
-              _buildTestAccountInfo('Marie Martin', 'marie@email.com', 'password'),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Fermer'),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildTestAccountInfo(String name, String email, String password) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          name,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text('Email: $email', style: const TextStyle(fontSize: 14)),
-        Text('Mot de passe: $password', style: const TextStyle(fontSize: 14)),
-      ],
-    );
-  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -373,17 +328,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                         ),
                         const SizedBox(height: 20),
 
-                        // Bouton pour voir les comptes de test
-                        TextButton.icon(
-                          onPressed: _showTestAccounts,
-                          icon: const Icon(Icons.info_outline, size: 18),
-                          label: const Text('Voir les comptes de test'),
-                          style: TextButton.styleFrom(
-                            foregroundColor: const Color(0xFF7C6FDC),
-                          ),
-                        ),
-                        
-                        const SizedBox(height: 60),
+                       
                         
                         // Lien d'inscription
                         Row(

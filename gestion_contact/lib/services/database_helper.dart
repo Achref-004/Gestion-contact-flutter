@@ -31,78 +31,10 @@ class DatabaseHelper {
     await Hive.openBox<User>(_usersBoxName);
     await Hive.openBox<Contact>(_contactsBoxName);
     
-    // Insérer des données de test si les boxes sont vides
-    await _insertTestDataIfNeeded();
+
   }
 
-  Future<void> _insertTestDataIfNeeded() async {
-    final usersBox = Hive.box<User>(_usersBoxName);
-    
-    if (usersBox.isEmpty) {
-      // Utilisateurs de test
-      final user1 = User(
-        id: 1,
-        nom: 'Dupont',
-        prenom: 'Jean',
-        email: 'jean@email.com',
-        telephone: '12345678',
-        password: '123456',
-        createdAt: DateTime.now(),
-      );
-      
-      final user2 = User(
-        id: 2,
-        nom: 'Martin',
-        prenom: 'Marie',
-        email: 'marie@email.com',
-        telephone: '23456789',
-        password: 'password',
-        createdAt: DateTime.now(),
-      );
-      
-      await usersBox.put(user1.email, user1);
-      await usersBox.put(user2.email, user2);
-      
-      // Contacts pour user 1
-      final contactsBox = Hive.box<Contact>(_contactsBoxName);
-      
-      final contact1 = Contact(
-        id: 1,
-        userId: 1,
-        nom: 'Dupont',
-        prenom: 'Marie',
-        telephone: '12345678',
-        email: 'marie@email.com',
-        isFavorite: true,
-        createdAt: DateTime.now(),
-      );
-      
-      final contact2 = Contact(
-        id: 2,
-        userId: 1,
-        nom: 'Martin',
-        prenom: 'Pierre',
-        telephone: '23456789',
-        email: 'pierre@email.com',
-        isFavorite: false,
-        createdAt: DateTime.now(),
-      );
-      
-      final contact3 = Contact(
-        id: 3,
-        userId: 1,
-        nom: 'Bernard',
-        prenom: 'Sophie',
-        telephone: '34567890',
-        isFavorite: true,
-        createdAt: DateTime.now(),
-      );
-      
-      await contactsBox.put('1_1', contact1);
-      await contactsBox.put('1_2', contact2);
-      await contactsBox.put('1_3', contact3);
-    }
-  }
+
 
   // ============ GESTION SESSION ============
 

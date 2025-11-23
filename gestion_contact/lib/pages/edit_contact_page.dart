@@ -156,15 +156,21 @@ class _EditContactPageState extends State<EditContactPage> {
       setState(() => _isLoading = true);
 
       try {
-        final updated = widget.contact.copyWith(
+        // CORRECTION: Créer le contact mis à jour en gardant l'ID et userId originaux
+        final updated = Contact(
+          id: widget.contact.id,
+          userId: widget.contact.userId,
           nom: _nomController.text.trim(),
           prenom: _prenomController.text.trim(),
           telephone: _telephoneController.text.trim(),
           email: _emailController.text.trim().isEmpty ? null : _emailController.text.trim(),
           adresse: _adresseController.text.trim().isEmpty ? null : _adresseController.text.trim(),
           photoPath: _photoPath,
+          isFavorite: widget.contact.isFavorite, // Garder le statut favori
+          createdAt: widget.contact.createdAt, // Garder la date de création
         );
 
+        // Mettre à jour dans Hive
         await _dbHelper.updateContact(updated);
 
         if (mounted) {
@@ -174,10 +180,12 @@ class _EditContactPageState extends State<EditContactPage> {
               backgroundColor: Colors.green,
             ),
           );
+          
+          // IMPORTANT: Retourner le contact mis à jour
           Navigator.pop(context, updated);
         }
       } catch (e) {
-        _showError('Erreur lors de la modification');
+        _showError('Erreur lors de la modification: $e');
       } finally {
         setState(() => _isLoading = false);
       }

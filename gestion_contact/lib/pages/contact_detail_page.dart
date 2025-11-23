@@ -24,6 +24,18 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     _contact = widget.contact;
   }
 
+  // Recharger le contact depuis la base de données
+  Future<void> _reloadContact() async {
+    if (_contact.id != null) {
+      final updated = await _dbHelper.getContact(_contact.id!);
+      if (updated != null && mounted) {
+        setState(() {
+          _contact = updated;
+        });
+      }
+    }
+  }
+
   // Appeler le contact
   Future<void> _makePhoneCall() async {
     final Uri launchUri = Uri(scheme: 'tel', path: _contact.telephone);
@@ -211,10 +223,20 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                       builder: (context) => EditContactPage(contact: _contact),
                     ),
                   );
-                  if (result != null && result is Contact) {
-                    setState(() {
-                      _contact = result;
-                    });
+                  
+                  // CORRECTION: Gérer le retour de la page d'édition
+                  if (result != null) {
+                    if (result == 'deleted') {
+                      // Contact supprimé, retourner à la liste
+                      Navigator.pop(context, true);
+                    } else if (result is Contact) {
+                      // Contact mis à jour
+                      setState(() {
+                        _contact = result;
+                      });
+                      // Optionnel: recharger depuis la DB pour être sûr
+                      await _reloadContact();
+                    }
                   }
                 },
               ),
