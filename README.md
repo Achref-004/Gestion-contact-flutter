@@ -4,6 +4,9 @@
     alt="logo"
   >
 </p>
+
+<div align="center"> 
+  
 # Gestion de Contacts - Flutter Application
 
 **Cross-platform contact management application with user accounts, offline-first storage, favorites and one-tap communication actions.**
@@ -14,6 +17,8 @@
 ![License](https://img.shields.io/badge/License-ISC-blue)
 ![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Desktop-lightgrey)
 
+</div>
+  
 ## Table of Contents
 
 - [Project Overview](#project-overview)
