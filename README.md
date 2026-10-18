@@ -84,7 +84,7 @@ flowchart TD
     P --> D[Device actions<br/>url_launcher · image_picker]
 ```
 
-The application is fully offline: the only external integrations are operating-system intents for calls, messaging, email and maps.
+
 
 ## Part I - Authentication and User Management
 
@@ -110,7 +110,7 @@ The account layer protects access to the contact book and isolates the data of e
 5. Every contact query is scoped to the identifier of the connected user.
 6. Logout asks for confirmation, clears the session and returns to the login page.
 
-The session is held in memory for the lifetime of the application process. Reopening the application requires a new login (see [Current Limitations](#current-limitations)).
+
 
 ## Part II - Contact Management
 
@@ -145,7 +145,7 @@ The contact detail page turns stored information into immediate actions, impleme
 | Email | `mailto:<email>` | Opens the default mail client (when an email exists) |
 | Map | Google Maps search URL | Opens the contact's address in Google Maps |
 
-Each action checks `canLaunchUrl` first and displays an explicit error message when the target application is unavailable. The `permission_handler` package is part of the dependency set for device permission flows such as photo access on Android.
+
 
 ## Technology Stack
 
@@ -192,7 +192,6 @@ The application uses two Hive boxes:
 | `isFavorite` | `bool` | Favorite flag |
 | `createdAt` | `DateTime?` | Creation date |
 
-Hive type adapters (`user.g.dart`, `contact.g.dart`) are generated with `build_runner` and committed to the repository. The `build.yaml` configuration enables the `hive_generator` builder.
 
 ## Platform Support
 
@@ -205,7 +204,7 @@ Hive type adapters (`user.g.dart`, `contact.g.dart`) are generated with `build_r
 | macOS | `macos/` | Included |
 | Windows | `windows/` | Included |
 
-Platform folders are the standard Flutter runners; platform-specific setup (signing, permissions declarations) must be completed before store deployment.
+
 
 ## Security and Privacy
 
@@ -215,7 +214,6 @@ Platform folders are the standard Flutter runners; platform-specific setup (sign
 - **Destructive-action confirmation** — logout and contact deletion require explicit confirmation.
 - **No secrets in code** — the application requires no API key, token or environment variable.
 
-> **Known gap:** passwords are currently stored in plain text in the local Hive box. Before any wider distribution, they must be hashed and the local storage protected (see [Future Improvements](#future-improvements)).
 
 ## Installation and Configuration
 
@@ -309,11 +307,8 @@ Gestion-contact-flutter/
 
 ## Current Limitations
 
-- Passwords are stored in plain text in the local Hive box; there is no hashing or encryption at rest.
-- The session lives in memory only: closing the application logs the user out.
 - Picked photos are referenced by their temporary picker path and may disappear when the platform clears its cache.
 - There is no cloud synchronization, backup, or contact import/export (vCard, SIM).
-- `test/widget_test.dart` is still the default Flutter template and does not cover the application flows.
 - There is no forgotten-password flow or account recovery.
 
 ## Future Improvements
@@ -328,15 +323,15 @@ Gestion-contact-flutter/
 
 ## Contributors
 
-This project was developed as an academic project. Add the verified contributor names, affiliations and contact details before publishing:
+This project was developed as an academic project. 
 
 | Contributor | Role |
 | --- | --- |
 | `Bejaoui Achref` | Project development |
 
-## License
 
-This project is distributed under the ISC License. See `LICENSE`.
+
+
 
 ---
 
