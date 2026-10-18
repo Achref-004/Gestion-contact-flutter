@@ -40,7 +40,6 @@
 - [Current Limitations](#current-limitations)
 - [Future Improvements](#future-improvements)
 - [Contributors](#contributors)
-- [License](#license)
 
 ## Project Overview
 
