@@ -1,3 +1,9 @@
+<p align="center">
+  <img
+    src="Screenshot 2026-10-18 190825.png"
+    alt="logo"
+  >
+</p>
 # Gestion de Contacts - Flutter Application
 
 **Cross-platform contact management application with user accounts, offline-first storage, favorites and one-tap communication actions.**
